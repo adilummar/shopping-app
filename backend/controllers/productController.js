@@ -36,3 +36,20 @@ exports.updateProduct = async (req,res,next)=>{
     res.status(200).json({success:true, data:product})
 }
 
+// delete product -- admin 
+exports.deleteProduct = async (req,res,next) =>{
+    let product = await Product.findById(req.params.id);
+
+    if(!product){
+        res.status(500).json({
+            success:false,
+            message:"product not found"
+        })
+    }
+
+    product = await Product.deleteOne()
+    res.status(200).json({
+        success:true,
+        // data:product
+    }) 
+}
